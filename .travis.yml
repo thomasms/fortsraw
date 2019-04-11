@@ -1,0 +1,68 @@
+matrix:
+  include:
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+            - gcc-5
+            - gfortran-5
+      env:
+         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5 && FC=gfortran-5"
+      compiler: gcc
+
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+            - gcc-6
+            - gfortran-6
+      env:
+        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6 && FC=gfortran-6"
+      compiler: gcc
+
+    # works on Precise and Trusty
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+            - gcc-7
+            - gfortran-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && FC=gfortran-7"
+      compiler: gcc
+
+env:
+  global:
+    - LD_LIBRARY_PATH=/usr/local/lib
+    - LD_RUN_PATH=/usr/local/lib
+    - PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+
+before_install:
+    - export FC=gfortran
+    - eval "${MATRIX_EVAL}"
+
+script:
+  - mkdir build
+  - cd build
+  - mkdir toast
+  - cd toast
+  - cmake -DCMAKE_BUILD_TYPE=Release ../../external/toast
+  - make
+  - cd ..
+  - cmake -DCMAKE_BUILD_TYPE=Release ..
+  - make
+  - ./bin/fortsrawtests
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

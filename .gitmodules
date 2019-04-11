@@ -1,0 +1,6 @@
+[submodule "external/fork"]
+	path = external/fork
+	url = https://github.com/thomasms/fork
+[submodule "external/toast"]
+	path = external/toast
+	url = https://github.com/thomasms/toast
