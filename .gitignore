@@ -1,0 +1,33 @@
+# Ignore mac hidden files
+*.DS_Store
+.cache
+
+# Ignore compiled files
+*.o
+*_m.o
+*_m.mod
+*.oo
+*.mod
+*.a
+*.dylib
+*.so
+*.dll
+*.u2d
+
+# Ignore Python pyc files
+*.pyc
+__pycache__
+
+# Ignore build folders
+**/build*/
+build/
+
+# Ignore temp folders
+**/temp/
+
+# IDE files
+*.xcworkspace/
+.idea
+*.userprefs
+*.vcxproj.user
+
