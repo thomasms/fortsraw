@@ -14,6 +14,7 @@ set (FORTSRAW_BENCH ${SOURCE_DIR_BASE}/bench)
 set (FORTSRAW_EXAMPLES_DIR ${SOURCE_DIR_BASE}/examples)
 set (FORTSRAW_EXTERNAL_DIR ${SOURCE_DIR_BASE}/external)
 set (FORTSRAW_FORTRAN_LIB_DIR ${SOURCE_DIR_BASE}/fortsraw)
+set (FORTSRAW_INCLUDE_DIR ${FORTSRAW_FORTRAN_LIB_DIR}/include)
 set (FORTSRAW_TEST_DIR ${SOURCE_DIR_BASE}/test)
 
 # library names
@@ -79,12 +80,13 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 set(FORTSRAW_MODULE_DIR ${FORTSRAW_BUILD_DIR}/include)
 
 # set include and link directories
-include_directories (${FORTSRAW_BUILD_DIR}/include)
+include_directories (${FORTSRAW_INCLUDE_DIR} 
+                     ${FORTSRAW_BUILD_DIR}/include)
 link_directories (${FORTSRAW_BUILD_DIR}/lib)
 
 # sources
 add_subdirectory(${FORTSRAW_FORTRAN_LIB_DIR})
 add_subdirectory(${FORTSRAW_TEST_DIR})
-#add_subdirectory(${FORTSRAW_EXAMPLES_DIR})
+add_subdirectory(${FORTSRAW_EXAMPLES_DIR})
 #add_subdirectory(${FORTSRAW_BENCH})
 

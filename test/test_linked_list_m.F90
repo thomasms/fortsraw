@@ -21,11 +21,11 @@ contains
         integer(ki4), parameter, dimension(4) :: values = (/2, 14, -5, 0/)
         integer(ki4) :: counter
 
-        call this%assertequal(0_ki4, linked_list%getsize(), &
+        call this%assertequal(0_ki4, linked_list%length(), &
                 & message="Size of linked list should be zero before any items added")
         call linked_list%reset()
         call linked_list%reset()
-        call this%assertequal(0_ki4, linked_list%getsize(), &
+        call this%assertequal(0_ki4, linked_list%length(), &
                 & message="Size of linked list should be zero before any items added")
 
         ! Set the first value
@@ -44,7 +44,7 @@ contains
         call allocateandappend(values(4))
         call assertfirstandlastvalue(values(1), values(4))
 
-        call this%assertequal(4_ki4, linked_list%getsize(), &
+        call this%assertequal(4_ki4, linked_list%length(), &
             & message="Size of linked list should be 4 after adding all the items")
         counter = 1_ki4
         call linked_list%traverse(asserteachentry)
@@ -57,7 +57,7 @@ contains
 
         call linked_list%reset()
         call linked_list%reset()
-        call this%assertequal(0, linked_list%getsize(), &
+        call this%assertequal(0, linked_list%length(), &
                 & message="Size of linked list should be zero after reset")
 
         ! Set the first value again after reset
@@ -88,13 +88,13 @@ contains
                 class(*), pointer :: general_pointer
                 integer(ki4) :: prev_size, i
 
-                prev_size = linked_list%getsize()
+                prev_size = linked_list%length()
 
                 i = valuetoadd
                 allocate(general_pointer, source=i)
                 call linked_list%append(general_pointer)
                 general_pointer => null()
-                call this%assertequal(prev_size + 1_ki4, linked_list%getsize(), &
+                call this%assertequal(prev_size + 1_ki4, linked_list%length(), &
                     & message="Size of linked list should be increased by 1")
 
             end subroutine allocateandappend

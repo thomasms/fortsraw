@@ -39,7 +39,7 @@ module linked_list_m
         procedure :: last
         procedure :: atindex
         procedure :: reset
-        procedure :: getsize
+        procedure :: length
         procedure :: traverse
         procedure, private :: cleanup
             final :: listfinalize
@@ -125,13 +125,13 @@ contains
     end subroutine reset
 
     !> Get the size of the list
-    pure function getsize(this) result(size)
+    pure function length(this) result(size)
         class(LinkedList), intent(in) :: this
         integer(ki4) :: size
 
         size = this%size
 
-    end function getsize
+    end function length
 
     ! Get the first node
     function first(this) result(firstnode)
@@ -152,7 +152,7 @@ contains
     end function last
 
     ! Get the node at index
-    ! must be between 1 and getsize()
+    ! must be between 1 and length()
     function atindex(this, index) result(indexnode)
         class(LinkedList), intent(in) :: this
         integer(ki4), intent(in)      :: index
@@ -203,7 +203,7 @@ contains
     end subroutine cleanup
 
     !> Get the node at index
-    ! must be between 1 and getsize()
+    ! must be between 1 and length()
     ! It uses the cached index if was set
     ! and then sets the cached node after access
     ! for subsequent calls 
